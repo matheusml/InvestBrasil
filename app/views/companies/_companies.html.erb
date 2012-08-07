@@ -2,7 +2,7 @@
 	<tbody>
 		<% companies.each do |company| %>
 			<tr>
-				<td><%= company.name %></td>
+				<td><%= link_to company.name, company %></td>
 			</tr>
 		<% end %>
 	</tbody>
