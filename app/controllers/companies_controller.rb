@@ -5,6 +5,7 @@ class CompaniesController < ApplicationController
 
 	def show
 		@company = Company.find params[:id]
+		@comments = company_comments @company.id
 	end
 
 	def new
@@ -41,4 +42,22 @@ class CompaniesController < ApplicationController
 
 		redirect_to companies_path, :notice => 'Empresa deletada com sucesso'
 	end
+
+	private
+
+	def company_comments company_id
+		company_user = CompanyUser.where :company_id => company_id
+		comments = []
+
+		if company_user.blank?
+			company_user = CompanyUser.create :company_id => company_id
+		else
+			company_user.each do |c|
+				comments << c.comments unless c.comments.blank?
+			end
+		end
+
+		comments
+	end
+
 end
