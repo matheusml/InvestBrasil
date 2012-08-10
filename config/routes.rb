@@ -10,4 +10,7 @@ InvestBrasil::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :companies
+
+  match 'companies/:company_id/create_comment', to: 'companies#create_comment', as: 'create_comment'
+
 end
