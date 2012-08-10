@@ -1,1 +1,3 @@
+<%= link_to 'Editar empresa', edit_company_path(@company) %>
+<%= link_to 'Deletar empresa', @company, :method => :delete, :confirm => 'Confirma?' %>
 <h2><%= @company.name %></h2>
