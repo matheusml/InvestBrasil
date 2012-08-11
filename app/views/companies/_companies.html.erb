@@ -1,0 +1,9 @@
+<table>
+	<tbody>
+		<% companies.each do |company| %>
+			<tr>
+				<td><%= link_to company.name, company %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
