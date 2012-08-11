@@ -1,0 +1,9 @@
+<%= link_to 'Editar empresa', edit_company_path(@company) %>
+<%= link_to 'Deletar empresa', @company, :method => :delete, :confirm => 'Confirma?' %>
+
+<h2><%= @company.name %></h2>
+
+<h3>Comentários</h3>
+<%= render :partial => 'create_comment', :locals => {:company => @company} %>
+
+<%= render :partial => 'comments', :locals => {:comments => @comments, :company => @company} unless @comments.blank? %>

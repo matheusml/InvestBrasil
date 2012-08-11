@@ -8,6 +8,17 @@
 </head>
 <body>
 
+<div id="user_nav">
+  <% if current_user %>
+    Logado como <strong><%= current_user.name %></strong>
+    <%= link_to "Sair", signout_path, id: "sign_out" %>
+  <% else %>
+    <div id="fb-root">
+      <%= link_to "Logar com o Facebook", "/auth/facebook" %>
+    </div>
+  <% end %>
+</div>
+
 <%= yield %>
 
 </body>
