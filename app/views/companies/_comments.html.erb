@@ -1,9 +1,7 @@
-<table>
-	<tbody>
-		<% comments.each do |c| %>
-			<tr>
-				<td><%= c.content %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+<% comments.each do |comment| %>
+		<%= comment.content %>
+		<ul>
+			<%= render :partial => 'subcomments', :locals => {:comment => comment} %>
+			<%= render :partial => 'create_subcomment', :locals => {:comment => comment, :company => company} %>
+		</ul>
+<% end %>

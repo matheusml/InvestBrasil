@@ -58,6 +58,12 @@ class CompaniesController < ApplicationController
 		redirect_to company_path params[:company_id]												 
 	end
 
+	def create_subcomment
+		subcomment = Subcomment.create :content => params[:content],
+																	 :comment_id => params[:comment_id]
+		redirect_to company_path params[:company_id]
+	end
+
 	private
 
 	def company_comments company_id

@@ -12,5 +12,6 @@ InvestBrasil::Application.routes.draw do
   resources :companies
 
   match 'companies/:company_id/create_comment', to: 'companies#create_comment', as: 'create_comment'
+  match 'companies/:company_id/:comment_id/create_subcomment', to: 'companies#create_subcomment', as: 'create_subcomment'
 
 end
