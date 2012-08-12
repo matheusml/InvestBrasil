@@ -130,12 +130,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  coffee-rails
-  execjs
-  jquery-rails
-  mysql2
-  omniauth-facebook
+  coffee-rails (~> 3.1.1)
+  execjs (~> 1.4.0)
+  jquery-rails (~> 1.0.19)
+  mysql2 (~> 0.3.11)
+  omniauth-facebook (~> 1.4.1)
   rails (= 3.1.1)
-  sass-rails
-  therubyracer
+  sass-rails (~> 3.1.6)
+  therubyracer (~> 0.10.1)
   uglifier (>= 1.0.3)
