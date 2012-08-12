@@ -22,5 +22,12 @@ class User < ActiveRecord::Base
 	    user
 	  end
 	end
+
+	def is_following_company? company_id
+		company_user = CompanyUser.where(:user_id => self.id, 
+																		 :company_id => company_id, 
+																		 :follow => true).first
+		not company_user.blank?
+	end
 	
 end

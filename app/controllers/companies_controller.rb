@@ -6,7 +6,6 @@ class CompaniesController < ApplicationController
 	def show
 		@company = Company.find params[:id]
 		@comments = company_comments @company.id
-		puts "--- #{@comments.inspect}"
 	end
 
 	def new

@@ -14,4 +14,7 @@ InvestBrasil::Application.routes.draw do
   match 'companies/:company_id/create_comment', to: 'companies#create_comment', as: 'create_comment'
   match 'companies/:company_id/:comment_id/create_subcomment', to: 'companies#create_subcomment', as: 'create_subcomment'
 
+  match 'companies/:company_id/follow_company', to: 'users#follow_company', as: 'follow_company'
+  match 'companies/:company_id/unfollow_company', to: 'users#unfollow_company', as: 'unfollow_company'
+
 end

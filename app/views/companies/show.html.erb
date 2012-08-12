@@ -1,6 +1,12 @@
 <%= link_to 'Editar empresa', edit_company_path(@company) %>
 <%= link_to 'Deletar empresa', @company, :method => :delete, :confirm => 'Confirma?' %>
 
+<% if current_user.is_following_company? @company.id %>
+	<%= link_to 'Não seguir empresa', unfollow_company_path(@company) %>
+<% else %>
+	<%= link_to 'Seguir empresa', follow_company_path(@company) %>
+<% end %>
+
 <h2><%= @company.name %></h2>
 
 <h3>Comentários</h3>
