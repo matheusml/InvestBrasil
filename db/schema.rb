@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120812200537) do
+ActiveRecord::Schema.define(:version => 20120812202146) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20120812200537) do
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
     t.string   "provider"
+    t.boolean  "admin"
   end
 
 end
