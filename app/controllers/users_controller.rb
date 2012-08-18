@@ -13,6 +13,10 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def edit
+		@user = User.find params[:id]
+	end
+
 	def follow_company
 		CompanyUser.create :user_id => session[:user_id],
 											 :company_id => params[:company_id],
