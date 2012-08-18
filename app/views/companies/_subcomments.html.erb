@@ -1,5 +1,3 @@
 <% comment.subcomments.each do |subcomment| %>
-<li>
-	<%= subcomment.content %>
-</li>
+	<p><%= link_to subcomment.owner %>: <%= subcomment.content %></p>
 <% end %>

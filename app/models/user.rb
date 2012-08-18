@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 	has_many :company_users
+	has_many :subcomments
+	has_many :comments
 
 	attr_accessible :name, :email, :password
 	attr_accessor :password
