@@ -1,4 +1,7 @@
 <%= form_tag(create_subcomment_path company, comment, :method => :post) do %>
   <%= text_area_tag 'content', '', :size => "40x1", :placeholder => 'Entre com seu comentário' %>
-<%= submit_tag 'Salvar' %>
+  <button type="submit" value="post" class="btn">
+  	<i class="icon-comment"></i> Comentar
+	</button>
 <% end %>
+

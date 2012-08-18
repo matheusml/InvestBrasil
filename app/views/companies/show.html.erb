@@ -2,9 +2,9 @@
 <%= link_to 'Deletar empresa', @company, :method => :delete, :confirm => 'Confirma?' %>
 
 <% if current_user.is_following_company? @company.id %>
-	<%= link_to 'Não seguir empresa', unfollow_company_path(@company) %>
+	<%= link_to 'Deixar de seguir', unfollow_company_path(@company), :class => 'btn btn-danger' %>
 <% else %>
-	<%= link_to 'Seguir empresa', follow_company_path(@company) %>
+	<%= link_to 'Seguir', follow_company_path(@company), :class => 'btn btn-primary' %>
 <% end %>
 
 <h2><%= @company.name %></h2>
