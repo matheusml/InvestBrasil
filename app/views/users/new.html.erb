@@ -1,27 +1,29 @@
-<h1>Sign Up</h1>
+<div class="well" align="center">
+  <a class="btn-large btn-primary" href="/auth/facebook">
+    <i class="icon-facebook-sign"></i> <b>Login com o Facebook</b>
+  </a><br />
 
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% for message in @user.errors.full_messages %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+  <br><h2>ou Cadastre-se</h2>
+  <%= form_for @user do |f| %>
+    <% if @user.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @user.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <p>
+      <%= f.text_field :name, :placeholder => 'Nome' %>
+    </p>
+    <p>
+      <%= f.text_field :email, :placeholder => 'E-mail' %>
+    </p>
+    <p>
+      <%= f.password_field :password, :placeholder => 'Senha' %>
+    </p>
+    <%= f.submit :class => 'btn btn-inverse', :value => "Cadastrar" %>
   <% end %>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </p>
-  <p class="button"><%= f.submit %></p>
-<% end %>
+</div>

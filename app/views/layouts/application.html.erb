@@ -41,25 +41,13 @@
                 <li><%= link_to "Sair", signout_path, id: "sign_out" %></li>
               </ul>
             <% else %>
-              <a class="btn btn-primary" href="/auth/facebook">
-                <i class="icon-facebook-sign"></i> <b>Login</b>
-              </a>
+                <b><%= link_to "Login", log_in_path, :class => 'btn' %></b>
             <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div id="user_nav">
-  <% if current_user %>
-    Logged in as <%= current_user.email %>.
-    <%= link_to "Log out", signout_path %>
-  <% else %>
-    <%= link_to "Sign up", sign_up_path %> or
-    <%= link_to "log in", log_in_path %>
-  <% end %>
-</div>
 
   <div class="container">
     <div class="row">
