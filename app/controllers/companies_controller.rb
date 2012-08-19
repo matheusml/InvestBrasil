@@ -76,6 +76,15 @@ class CompaniesController < ApplicationController
     render json: list
 	end
 
+	def redirect_to_correct_company
+		company = Company.find_by_name params[:company]
+		if company
+			redirect_to company_path company
+		else
+			redirect_to companies_path
+		end
+	end
+
 	private
 
 	def company_comments company_id

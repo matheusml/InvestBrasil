@@ -23,5 +23,7 @@ InvestBrasil::Application.routes.draw do
   resources :sessions
 
    match "/companies_ajax" => "companies#companies_ajax"
+   match "/redirect_to_correct_company" => "companies#redirect_to_correct_company",
+                                :as => 'redirect_to_correct_company'
 
 end

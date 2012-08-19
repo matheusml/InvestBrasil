@@ -27,7 +27,7 @@
             <li><%= link_to "Empresas", companies_path %></li>
           </ul>
 
-          <%= form_tag(companies_path, :class => 'navbar-search pull-left') do %>
+          <%= form_tag(redirect_to_correct_company_path, :class => 'navbar-search pull-left') do %>
             <%= text_field_tag :company, '', :class => "search-query span2", :placeholder => 'Procurar empresas'%>
            <% end %> 
 
