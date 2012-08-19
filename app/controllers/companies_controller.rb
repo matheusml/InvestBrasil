@@ -65,6 +65,17 @@ class CompaniesController < ApplicationController
 		redirect_to company_path params[:company_id]
 	end
 
+	def companies_ajax
+		if params[:term]
+      like = "%".concat(params[:term].concat("%"))
+      companies = Company.where("name like ?", like)
+    else
+      companies = Company.all
+    end
+    list = companies.map {|u| Hash[ id: u.id, label: u.name, name: u.name]}
+    render json: list
+	end
+
 	private
 
 	def company_comments company_id

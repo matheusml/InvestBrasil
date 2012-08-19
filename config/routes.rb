@@ -22,4 +22,6 @@ InvestBrasil::Application.routes.draw do
   resources :users
   resources :sessions
 
+   match "/companies_ajax" => "companies#companies_ajax"
+
 end
