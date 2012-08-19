@@ -36,14 +36,12 @@
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#">Editar</a></li>
+                <li><%= link_to "Editar", edit_user_path(current_user) %></li>
                 <li class="divider"></li>
                 <li><%= link_to "Sair", signout_path, id: "sign_out" %></li>
               </ul>
             <% else %>
-              <a class="btn btn-primary" href="/auth/facebook">
-                <i class="icon-facebook-sign"></i> <b>Login</b>
-              </a>
+                <b><%= link_to "Login", log_in_path, :class => 'btn' %></b>
             <% end %>
           </div>
         </div>

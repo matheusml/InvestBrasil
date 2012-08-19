@@ -8,6 +8,8 @@ gem 'execjs', '~> 1.4.0'
 gem 'therubyracer', '~> 0.10.1'
 gem 'omniauth-facebook', '~> 1.4.1'
 
+gem	'bcrypt-ruby', :require => 'bcrypt'
+
 group :assets do
   gem 'sass-rails', '~> 3.1.6'
   gem 'coffee-rails', '~> 3.1.1'
@@ -16,4 +18,6 @@ group :assets do
 	gem 'twitter-bootstrap-rails'
 	
 end
+
+gem 'rails-i18n'
 

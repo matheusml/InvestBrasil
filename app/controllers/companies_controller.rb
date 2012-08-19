@@ -52,14 +52,16 @@ class CompaniesController < ApplicationController
 		end
 
 		comment = Comment.create :content => params[:content],
-														 :company_user_id => company_user.id
+														 :company_user_id => company_user.id,
+														 :user_id => session[:user_id]
 
 		redirect_to company_path params[:company_id]												 
 	end
 
 	def create_subcomment
 		subcomment = Subcomment.create :content => params[:content],
-																	 :comment_id => params[:comment_id]
+																	 :comment_id => params[:comment_id],
+																	 :user_id => session[:user_id]
 		redirect_to company_path params[:company_id]
 	end
 
