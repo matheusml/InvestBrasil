@@ -1,8 +1,6 @@
 <% comment.subcomments.each do |subcomment| %>
-  <li>
-  <span class="content"><%= subcomment.content %></span>
-  <span class="timestamp">
+  <span class="content"><%= link_to subcomment.owner %>: <%= subcomment.content %></span>
+  <p class="timestamp">
     Postado <%= time_ago_in_words(subcomment.created_at) %> atrás.
-  </span>
-	</li>
+  </p>
 <% end %>

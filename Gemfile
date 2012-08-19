@@ -19,3 +19,5 @@ group :assets do
 	
 end
 
+gem 'rails-i18n'
+
