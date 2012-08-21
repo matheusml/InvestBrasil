@@ -9,7 +9,11 @@ class CompaniesController < ApplicationController
 	end
 
 	def new
-		@company = Company.new
+		if current_user && current_user.admin?
+			@company = Company.new
+		else
+			redirect_to companies_path
+		end
 	end
 
 	def create
@@ -23,24 +27,36 @@ class CompaniesController < ApplicationController
 	end
 
 	def edit
-		@company = Company.find params[:id]
+		if current_user && current_user.admin?
+			@company = Company.find params[:id]
+		else
+			redirect_to companies_path
+		end
 	end
 
 	def update
-		@company = Company.find params[:id]
-		
-		if @company.update_attributes params[:company]
-			redirect_to companies_path, :notice => 'Empresa atualizada com sucesso'			
+		if current_user && current_user.admin?
+			@company = Company.find params[:id]
+			
+			if @company.update_attributes params[:company]
+				redirect_to companies_path, :notice => 'Empresa atualizada com sucesso'			
+			else
+				render 'edit'
+			end
 		else
-			render 'edit'
+			redirect_to companies_path
 		end
 	end
 
 	def destroy
-		company = Company.find params[:id]
-		company.destroy
+		if current_user && current_user.admin?
+			company = Company.find params[:id]
+			company.destroy
 
-		redirect_to companies_path, :notice => 'Empresa deletada com sucesso'
+			redirect_to companies_path, :notice => 'Empresa deletada com sucesso'
+		else
+			redirect_to companies_path
+		end
 	end
 
 	def create_comment

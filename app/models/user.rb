@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 	has_many :subcomments
 	has_many :comments
 
-	attr_accessible :name, :email, :password
+	attr_accessible :name, :email, :password, :admin
 	attr_accessor :password
 
 	before_save :encrypt_password
@@ -13,6 +13,14 @@ class User < ActiveRecord::Base
 			self.password_salt = BCrypt::Engine.generate_salt
 			self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
 		end
+	end
+
+	def admin?
+		self.admin
+	end
+
+	def make_admin!
+		self.update_attributes! :admin => true
 	end
 
 	def self.authenticate(email, password)
