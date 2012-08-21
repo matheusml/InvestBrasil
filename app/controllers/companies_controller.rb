@@ -78,6 +78,9 @@ class CompaniesController < ApplicationController
 		subcomment = Subcomment.create :content => params[:content],
 																	 :comment_id => params[:comment_id],
 																	 :user_id => session[:user_id]
+		comment = Comment.find params[:comment_id]
+		comment.update_attributes :updated_at => Time.zone.now
+																	 
 		redirect_to company_path params[:company_id]
 	end
 
@@ -115,7 +118,7 @@ class CompaniesController < ApplicationController
 			end
 		end
 
-		comments
+		comments.sort_by{|c| c[:updated_at]}.reverse
 	end
 
 end
