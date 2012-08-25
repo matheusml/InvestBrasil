@@ -1,11 +1,14 @@
 <% comments.each do |comment| %>
-	<h3><%= link_to comment.owner %>: <%= comment.content %></h3>
-	<p class="timestamp">
-    Postado <%= time_ago_in_words(comment.created_at) %> atrás.
-  </p>
-	<ul>
-		<%= render :partial => 'subcomments', :locals => {:comment => comment} %>
-		<%= render :partial => 'create_subcomment', :locals => {:comment => comment, :company => company} %>
-	</ul>
+	<div class="well">
+		<h3><%= link_to comment.owner %>: <%= comment.content %></h3>
+		<p class="timestamp">
+	    Postado <%= time_ago_in_words(comment.created_at) %> atrás.
+	  </p>
+	  <hr>
+		<ul>
+			<%= render :partial => 'subcomments', :locals => {:comment => comment} %>
+			<%= render :partial => 'create_subcomment', :locals => {:comment => comment, :company => company} %>
+		</ul>
+	</div>
 	<hr>
 <% end %>

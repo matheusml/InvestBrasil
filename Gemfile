@@ -20,4 +20,5 @@ group :assets do
 end
 
 gem 'rails-i18n'
+gem 'will_paginate'
 

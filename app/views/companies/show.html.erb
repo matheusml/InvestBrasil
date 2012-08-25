@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'comments' %>
+
 <% if current_user && current_user.admin? %>
 	<%= link_to 'Editar empresa', edit_company_path(@company) %>
 	<%= link_to 'Deletar empresa', @company, :method => :delete, :confirm => 'Confirma?' %>
@@ -14,7 +16,11 @@
 </div>
 
 <h3>Comentários</h3>
-	<%= render :partial => 'create_comment', :locals => {:company => @company} %>
+<%= render :partial => 'create_comment', :locals => {:company => @company} %>
 <hr>
 
-<%= render :partial => 'comments', :locals => {:comments => @comments, :company => @company} unless @comments.blank? %>
+<div id="comments">
+	<%= render :partial => 'comments_manager', :locals => {:comments => @comments, :company => @company} %>
+</div>
+
+<%= will_paginate @comments, :previous_label => "&nbsp; &laquo; Anterior", :next_label => "&nbsp; Próxima &raquo;" %>

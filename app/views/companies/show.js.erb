@@ -1,0 +1,6 @@
+$('#comments').append('<%= j render :partial => 'comments_manager', :locals => {:comments => @comments, :company => @company} %>');
+<% if @comments.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate(@comments) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
