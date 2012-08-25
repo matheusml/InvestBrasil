@@ -1,5 +1,10 @@
 <% comment.subcomments.each do |subcomment| %>
-  <span class="content"><%= link_to subcomment.owner %>: <%= subcomment.content %></span>
+  <span class="content">
+  	<% if current_user %>
+  		<%= image_tag current_user.avatar.url(:thumb) %>
+  	<% end %>	
+  	<%= link_to subcomment.owner %>: <%= subcomment.content %>
+  </span>
   <p class="timestamp">
     Postado <%= time_ago_in_words(subcomment.created_at) %> atrás.
   </p>

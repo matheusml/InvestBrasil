@@ -1,6 +1,10 @@
 <% comments.each do |comment| %>
 	<div class="well">
-		<h3><%= link_to comment.owner %>: <%= comment.content %></h3>
+		<h3>
+			<% if current_user %>	
+				<%= image_tag current_user.avatar.url(:thumb) %>
+			<% end %><%= link_to comment.owner %>: <%= comment.content %>
+		</h3>
 		<p class="timestamp">
 	    Postado <%= time_ago_in_words(comment.created_at) %> atrás.
 	  </p>

@@ -3,10 +3,18 @@
 <% if current_user && current_user.admin? %>
 	<%= link_to 'Editar empresa', edit_company_path(@company) %>
 	<%= link_to 'Deletar empresa', @company, :method => :delete, :confirm => 'Confirma?' %>
+	<%= form_for @company, :html => { :multipart => true } do |form| %>
+  	<%= form.file_field :avatar %>
+  	<%= form.submit :value => "Salvar" %>
+	<% end %>
 <% end %>
 
 <div class="well">
-	<h2><%= @company.name %> 
+	<h2>
+		<% if @company.avatar_file_name %>
+  		<%= image_tag @company.avatar.url(:thumb) %>
+  	<% end %>
+		<%= @company.name %> 
 		<% if current_user.is_following_company? @company.id %>
 			<%= link_to 'Deixar de seguir', unfollow_company_path(@company), :class => 'btn btn-danger' %>
 		<% else %>
