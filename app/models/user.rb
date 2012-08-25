@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
 	has_many :subcomments
 	has_many :comments
 
+	attr_accessible :avatar
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
 	attr_accessible :name, :email, :password, :admin
 	attr_accessor :password
 

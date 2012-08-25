@@ -17,6 +17,16 @@ class UsersController < ApplicationController
 		@user = User.find params[:id]
 	end
 
+	def update
+		@user = User.find params[:id]
+		
+		if @user.update_attributes params[:user]
+			redirect_to edit_user_path(@user), :notice => 'Atualizado com sucesso'			
+		else
+			render 'edit'
+		end
+	end
+
 	def follow_company
 		CompanyUser.create :user_id => session[:user_id],
 											 :company_id => params[:company_id],
