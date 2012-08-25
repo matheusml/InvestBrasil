@@ -11,8 +11,13 @@
     <p>
       <%= f.password_field :password, :placeholder => 'Senha' %>
     </p>
+    <hr>
     <p>
+    <% if @user.avatar_file_name %>
   		<%= image_tag @user.avatar.url(:medium) %>
+  	<% else %>
+  	<strong>Escolha um avatar</strong>
+  	<% end %>
   	</p>
 		<p>
 			<%= f.file_field :avatar %>
