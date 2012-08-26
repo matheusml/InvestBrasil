@@ -1,0 +1,11 @@
+<h2>
+<% if company.avatar_file_name %>
+	<%= image_tag company.avatar.url(:thumb) %>
+<% end %>
+	<%= company.name %> 
+	<% if current_user.is_following_company? company.id %>
+		<%= link_to 'Deixar de seguir', unfollow_company_path(company), :class => 'btn btn-danger' %>
+	<% else %>
+		<%= link_to 'Seguir', follow_company_path(company), :class => 'btn btn-primary' %>
+	<% end %>
+</h2>	
