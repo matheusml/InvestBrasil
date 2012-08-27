@@ -1,8 +1,6 @@
 <% comment.subcomments.each do |subcomment| %>
   <span class="content">
-  	<% if current_user %>
-  		<%= image_tag current_user.avatar.url(:thumb) %>
-  	<% end %>	
+  	<%= image_tag subcomment.user.avatar.url(:thumb) %>
   	<%= link_to subcomment.owner %>: <%= subcomment.content %>
   </span>
   <p class="timestamp">
