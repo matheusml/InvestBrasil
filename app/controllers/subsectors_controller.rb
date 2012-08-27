@@ -1,0 +1,2 @@
+class SubsectorsController < ApplicationController
+end

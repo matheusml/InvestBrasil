@@ -8,4 +8,13 @@
 	<% else %>
 		<%= link_to 'Seguir', follow_company_path(company), :class => 'btn btn-primary' %>
 	<% end %>
-</h2>	
+</h2>
+<ul>
+<li>Atividade: <%= company.activity %></li>
+<li>Setor: <%= company.sector.name %></li>
+<li>Sub-Setor: <%= company.subsector.name %></li>
+<li>Segmento de Mercado: <%= company.segment.name %></li>
+<li>Segmento de Listagem: <%= company.listing_segment %></li>
+<li>Valor de Mercado: <%= company.market_value %></li>
+<li>Site: <%= link_to company.website, company.website %></li>
+</ul>
