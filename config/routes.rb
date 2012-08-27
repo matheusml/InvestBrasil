@@ -19,11 +19,16 @@ InvestBrasil::Application.routes.draw do
 
   get 'log_in' => 'sessions#new', :as => 'log_in'
   get 'sign_up' => 'users#new', :as => 'sign_up'  
+  
   resources :users
   resources :sessions
 
-   match "/companies_ajax" => "companies#companies_ajax"
-   match "/redirect_to_correct_company" => "companies#redirect_to_correct_company",
+  match "/companies_ajax" => "companies#companies_ajax"
+  match "/redirect_to_correct_company" => "companies#redirect_to_correct_company",
                                 :as => 'redirect_to_correct_company'
+
+  match "companies/sector/:sector_id" => "sectors#show", :as => 'sectors'                         
+  match "companies/subsector/:subsector_id" => "subsectors#show", :as => 'subsectors'                         
+  match "companies/segment/:segment_id" => "segments#show", :as => 'segments'                         
 
 end
