@@ -1,1 +1,28 @@
-<h1>users#edit</h1>
+<div class="well" align="center">
+  <h2>Editar</h2>
+  
+	<%= form_for @user, :html => { :multipart => true } do |f| %>
+		<p>
+      <%= f.text_field :name, :placeholder => 'Nome' %>
+    </p>
+    <p>
+      <%= f.text_field :email, :placeholder => 'E-mail' %>
+    </p>
+    <p>
+      <%= f.password_field :password, :placeholder => 'Senha' %>
+    </p>
+    <hr>
+    <p>
+    <% if @user.avatar_file_name %>
+  		<%= image_tag @user.avatar.url(:medium) %>
+  	<% else %>
+  	<strong>Escolha um avatar</strong>
+  	<% end %>
+  	</p>
+		<p>
+			<%= f.file_field :avatar %>
+		</p>
+    <%= f.submit :class => 'btn btn-inverse', :value => "Salvar" %>
+  <% end %>
+</div>
+

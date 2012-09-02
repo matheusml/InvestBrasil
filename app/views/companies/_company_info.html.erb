@@ -1,0 +1,20 @@
+<h2>
+<% if company.avatar_file_name %>
+	<%= image_tag company.avatar.url(:thumb) %>
+<% end %>
+	<%= company.name %> 
+	<% if current_user.is_following_company? company.id %>
+		<%= link_to 'Deixar de seguir', unfollow_company_path(company), :class => 'btn btn-danger' %>
+	<% else %>
+		<%= link_to 'Seguir', follow_company_path(company), :class => 'btn btn-primary' %>
+	<% end %>
+</h2>
+<ul>
+	<li>Atividade: <%= company.activity %></li>
+	<li>Setor: <%= link_to company.sector.name, sectors_path(company.sector.id) %></li>
+	<li>Sub-Setor: <%= link_to company.subsector.name, subsectors_path(company.subsector.id) %></li>
+	<li>Segmento de Mercado: <%= link_to company.segment.name, segments_path(company.segment.id) %></li>
+	<li>Segmento de Listagem: <%= company.listing_segment %></li>
+	<li>Valor de Mercado: <%= company.market_value %></li>
+	<li>Site: <%= link_to company.website, company.website %></li>
+</ul>

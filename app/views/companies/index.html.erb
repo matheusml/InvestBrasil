@@ -1,4 +1,6 @@
-<%= link_to 'Criar nova empresa', new_company_path %>
+<% if current_user && current_user.admin? %>
+	<%= link_to 'Criar nova empresa', new_company_path %>
+<% end %>	
 
 <h1>Empresas</h1>
 <%= render :partial => 'companies', :locals => {:companies => @companies} %>
