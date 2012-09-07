@@ -88,7 +88,12 @@ class CompaniesController < ApplicationController
 		end
 
 		users.each do |user|
-		  Notification.create :comment_id => comment.id, :user_id => user.id
+			notification = Notification.where(:comment_id => comment.id, :user_id => user.id)
+			if notification.present?
+		  	notification.first.update_attributes :read => nil
+		  else
+		  	Notification.create :comment_id => comment.id, :user_id => user.id
+			end
 		end
 
 		redirect_to company_path params[:company_id]
