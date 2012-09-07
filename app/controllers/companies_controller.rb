@@ -80,7 +80,17 @@ class CompaniesController < ApplicationController
 																	 :user_id => session[:user_id]
 		comment = Comment.find params[:comment_id]
 		comment.update_attributes :updated_at => Time.zone.now
-																	 
+
+		users = []
+		users << comment.user
+		comment.subcomments.each do |subcomment|
+			users << subcomment.user unless users.include? subcomment.user
+		end
+
+		users.each do |user|
+		  Notification.create :comment_id => comment.id, :user_id => user.id
+		end
+
 		redirect_to company_path params[:company_id]
 	end
 
