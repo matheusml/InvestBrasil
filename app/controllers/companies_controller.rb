@@ -99,6 +99,31 @@ class CompaniesController < ApplicationController
 		redirect_to company_path params[:company_id]
 	end
 
+	def create_subcomment_in_notifications
+		subcomment = Subcomment.create :content => params[:content],
+																	 :comment_id => params[:comment_id],
+																	 :user_id => session[:user_id]
+		comment = Comment.find params[:comment_id]
+		comment.update_attributes :updated_at => Time.zone.now
+
+		users = []
+		users << comment.user
+		comment.subcomments.each do |subcomment|
+			users << subcomment.user unless users.include? subcomment.user
+		end
+
+		users.each do |user|
+			notification = Notification.where(:comment_id => comment.id, :user_id => user.id)
+			if notification.present?
+				notification = notification.first
+		  	notification.update_attributes :read => nil
+		  else
+		  	notification = Notification.create :comment_id => comment.id, :user_id => user.id
+			end
+			redirect_to notification_path(notification)
+		end
+	end
+
 	def companies_ajax
 		if params[:term]
       like = "%".concat(params[:term].concat("%"))

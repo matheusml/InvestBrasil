@@ -1,0 +1,32 @@
+<%= javascript_include_tag 'subcomment' %>
+
+<div id="comments">
+	<div class="well">
+		<h3>
+			<%= image_tag @comment.user.avatar.url(:thumb) %>
+			<%= link_to @comment.owner %>: <%= @comment.content %>
+		</h3>
+		<p class="timestamp">
+	    Postado <%= time_ago_in_words(@comment.created_at) %> atrás.
+	  </p>
+	  <hr>
+		<ul>
+			<% @comment.subcomments.each do |subcomment| %>
+		  <span class="content">
+		  	<%= image_tag subcomment.user.avatar.url(:thumb) %>
+		  	<%= link_to subcomment.owner %>: <%= subcomment.content %>
+		  </span>
+		  <p class="timestamp">
+		    Postado <%= time_ago_in_words(subcomment.created_at) %> atrás.
+		  </p>
+		<% end %>
+
+		<%= form_tag(create_subcomment_in_notifications_path @company, @comment, :method => :post) do %>
+  	<div class="field subcomment"><%= text_area_tag 'content', '', :rows => "1", :placeholder => 'Entre com seu comentário' %></div>
+  		<button type="submit" value="post" class="btn btn-inverse">
+  			<i class="icon-comment"></i> Comentar
+			</button>
+		<% end %>
+		</ul>
+	</div>
+</div>

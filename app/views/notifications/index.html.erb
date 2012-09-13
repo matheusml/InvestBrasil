@@ -1,3 +1,9 @@
 <% @notifications.each do |notification| %>
-	<%= notification.inspect %>
+  <% comment = Comment.find(notification.comment_id) %>
+	<div class="well">
+		<h3>
+			<%= image_tag comment.user.avatar.url(:thumb) %>
+			<%= link_to comment.owner %>: <%= link_to comment.content, notification_path(notification) %>
+		</h3>
+	</div>	
 <% end %>
