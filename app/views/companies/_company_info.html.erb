@@ -11,9 +11,18 @@
 </h2>
 <ul>
 	<li>Atividade: <%= company.activity %></li>
-	<li>Setor: <%= link_to company.sector.name, sectors_path(company.sector.id) %></li>
-	<li>Sub-Setor: <%= link_to company.subsector.name, subsectors_path(company.subsector.id) %></li>
-	<li>Segmento de Mercado: <%= link_to company.segment.name, segments_path(company.segment.id) %></li>
+	<li>Setor:
+	<% if company.sector %> 
+		<%= link_to company.sector.name, sectors_path(company.sector.id) %></li>
+	<% end %>	
+	<li>Sub-Setor: 
+	<% if company.subsector %> 
+		<%= link_to company.subsector.name, subsectors_path(company.subsector.id) %></li>
+	<% end %>
+	<li>Segmento de Mercado: 
+	<% if company.segment %> 
+		<%= link_to company.segment.name, segments_path(company.segment.id) %></li>
+	<% end %>
 	<li>Segmento de Listagem: <%= company.listing_segment %></li>
 	<li>Valor de Mercado: <%= company.market_value %></li>
 	<li>Site: <%= link_to company.website, company.website %></li>
