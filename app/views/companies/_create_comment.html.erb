@@ -1,6 +1,6 @@
 <%= form_tag(create_comment_path company, :method => :post) do %>
-  <div class="field"><%= text_area_tag 'content', '', :rows => 3, :placeholder => 'Entre com seu comentário' %></div>
-	<button type="submit" value="post" class="btn btn-inverse">
+  <div class="field"><%= text_area_tag 'content', '', {:rows => 3, :placeholder => placeholder_condition(current_user), :disabled => disabled_if_no_user(current_user) } %></div>
+	<button type="submit" value="post" class="btn btn-inverse" <%= disabled?(current_user) %>>
   	<i class="icon-comment"></i> Comentar
 	</button>
 <% end %>

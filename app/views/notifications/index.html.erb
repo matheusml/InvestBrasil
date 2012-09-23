@@ -1,0 +1,18 @@
+<% if current_user %>	
+	<% @notifications.each do |notification| %>
+	  <% comment = Comment.find(notification.comment_id) %>
+		<div class="well">
+			<h3>
+				<% if notification.read %>
+					<span class="label label-success">Lido</span>
+				<% else %>
+					<span class="label label-warning">Não lido</span>
+				<% end %>
+				<%= image_tag comment.user.avatar.url(:thumb) %>
+				<%= comment.owner %>: <%= link_to comment.content, notification_path(notification) %>
+			</h3>
+		</div>	
+	<% end %>
+<% else %>
+	<h3>Você precisa estar cadastrado para ter notificações</h3>
+<% end %>

@@ -1,7 +1,47 @@
-<h1>home#index</h1>
-
 <script>
 	if (window.location.href.indexOf('#_=_') > 0) {
     window.location = window.location.href.replace(/#.*/, '');
 	}
 </script>
+
+<% if @comments.blank? %>
+	<h3>Você não segue nenhuma empresa</h3>
+<% else %>	
+	<h3>Empresas que você segue:</h3>
+	<div id="comments">
+		<% @comments.each do |comment| %>
+		<div class="well">
+			<% company_user = CompanyUser.find(comment.company_user_id) %>
+			<% company = Company.find(company_user.company_id) %>
+			<h2><%= company.name %></h2>
+			<h3>
+				<%= image_tag comment.user.avatar.url(:thumb) %>
+				<%= link_to comment.owner %>: <%= comment.content %>
+			</h3>
+			<p class="timestamp">
+		    Postado <%= time_ago_in_words(comment.created_at) %> atrás.
+		  </p>
+		  <hr>
+			<ul>
+				<% comment.subcomments.each do |subcomment| %>
+			  <span class="content">
+			  	<%= image_tag subcomment.user.avatar.url(:thumb) %>
+			  	<%= link_to subcomment.owner %>: <%= subcomment.content %>
+			  </span>
+			  <p class="timestamp">
+			    Postado <%= time_ago_in_words(subcomment.created_at) %> atrás.
+			  </p>
+			<% end %>
+
+			<%= form_tag(create_subcomment_in_home_path company, comment, :method => :post) do %>
+  			<div class="field subcomment"><%= text_area_tag 'content', '', :rows => "1", :placeholder => 'Entre com seu comentário' %></div>
+  				<button type="submit" value="post" class="btn btn-inverse">
+  					<i class="icon-comment"></i> Comentar
+					</button>
+				<% end %>
+			</div>
+			<% end %>
+		</ul>
+	</div>
+<% end %>	
+

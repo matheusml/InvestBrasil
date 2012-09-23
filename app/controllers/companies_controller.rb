@@ -5,7 +5,7 @@ class CompaniesController < ApplicationController
 
 	def show
 		@company = Company.find params[:id]
-		@comments = company_comments(@company.id).paginate(:page => params[:page], :per_page => 2)		
+		@comments = company_comments(@company.id).paginate(:page => params[:page], :per_page => 5)		
 	end
 
 	def new
@@ -61,10 +61,13 @@ class CompaniesController < ApplicationController
 
 	def create_comment
 		company_user = CompanyUser.where(:company_id => params[:company_id],
-																			:user_id => session[:user_id]).first
+																		 :user_id => session[:user_id])
+
 		if company_user.blank?																	
 			company_user = CompanyUser.create :company_id => params[:company_id],
 																				:user_id => session[:user_id]
+		else
+			company_user = company_user.first																		
 		end
 
 		comment = Comment.create :content => params[:content],
@@ -80,8 +83,73 @@ class CompaniesController < ApplicationController
 																	 :user_id => session[:user_id]
 		comment = Comment.find params[:comment_id]
 		comment.update_attributes :updated_at => Time.zone.now
-																	 
+
+		users = []
+		users << comment.user
+		comment.subcomments.each do |subcomment|
+			users << subcomment.user unless users.include? subcomment.user
+		end
+
+		users.each do |user|
+			notification = Notification.where(:comment_id => comment.id, :user_id => user.id)
+			if notification.present?
+		  	notification.first.update_attributes :read => nil
+		  else
+		  	Notification.create :comment_id => comment.id, :user_id => user.id
+			end
+		end
+
 		redirect_to company_path params[:company_id]
+	end
+
+	def create_subcomment_in_notifications
+		subcomment = Subcomment.create :content => params[:content],
+																	 :comment_id => params[:comment_id],
+																	 :user_id => session[:user_id]
+		comment = Comment.find params[:comment_id]
+		comment.update_attributes :updated_at => Time.zone.now
+
+		users = []
+		users << comment.user
+		comment.subcomments.each do |subcomment|
+			users << subcomment.user unless users.include? subcomment.user
+		end
+
+		users.each do |user|
+			notification = Notification.where(:comment_id => comment.id, :user_id => user.id)
+			if notification.present?
+				notification = notification.first
+		  	notification.update_attributes :read => nil
+		  else
+		  	notification = Notification.create :comment_id => comment.id, :user_id => user.id
+			end
+			redirect_to notification_path(notification)
+		end
+	end
+
+	def create_subcomment_in_home
+		subcomment = Subcomment.create :content => params[:content],
+																	 :comment_id => params[:comment_id],
+																	 :user_id => session[:user_id]
+		comment = Comment.find params[:comment_id]
+		comment.update_attributes :updated_at => Time.zone.now
+
+		users = []
+		users << comment.user
+		comment.subcomments.each do |subcomment|
+			users << subcomment.user unless users.include? subcomment.user
+		end
+
+		users.each do |user|
+			notification = Notification.where(:comment_id => comment.id, :user_id => user.id)
+			if notification.present?
+				notification = notification.first
+		  	notification.update_attributes :read => nil
+		  else
+		  	notification = Notification.create :comment_id => comment.id, :user_id => user.id
+			end
+			redirect_to root_url
+		end
 	end
 
 	def companies_ajax

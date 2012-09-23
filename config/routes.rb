@@ -13,7 +13,11 @@ InvestBrasil::Application.routes.draw do
 
   match 'companies/:company_id/create_comment', to: 'companies#create_comment', as: 'create_comment'
   match 'companies/:company_id/:comment_id/create_subcomment', to: 'companies#create_subcomment', as: 'create_subcomment'
-
+  match 'companies/:company_id/:comment_id/create_subcomment_in_notifications', to: 'companies#create_subcomment_in_notifications', 
+                                                                      as: 'create_subcomment_in_notifications'
+  match 'companies/:company_id/:comment_id/create_subcomment_in_home', to: 'companies#create_subcomment_in_home', 
+                                                                      as: 'create_subcomment_in_home'
+                                                                    
   match 'companies/:company_id/follow_company', to: 'users#follow_company', as: 'follow_company'
   match 'companies/:company_id/unfollow_company', to: 'users#unfollow_company', as: 'unfollow_company'
 
@@ -22,6 +26,7 @@ InvestBrasil::Application.routes.draw do
   
   resources :users
   resources :sessions
+  resources :notifications
 
   match "/companies_ajax" => "companies#companies_ajax"
   match "/redirect_to_correct_company" => "companies#redirect_to_correct_company",

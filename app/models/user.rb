@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 	has_many :company_users
 	has_many :subcomments
 	has_many :comments
+	has_many :notifications
 
 	attr_accessible :avatar
   has_attached_file :avatar, :styles => { :medium => "200x200>", :thumb => "32x32>" }
