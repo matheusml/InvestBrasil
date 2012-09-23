@@ -1,11 +1,15 @@
 class NotificationsController < ApplicationController
 
 	def index
-		@notifications = current_user.notifications	
+		if current_user
+			@notifications = current_user.notifications	
+		end
 	end
 
 	def show
 		@notification = Notification.find params[:id]
+		@notification.read = true
+		@notification.save
 		@comment = Comment.find @notification.comment_id
 
 		company_user = CompanyUser.find @comment.company_user_id

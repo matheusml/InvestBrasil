@@ -1,11 +1,13 @@
 class HomeController < ApplicationController
   def index
-  	company_user = CompanyUser.where(:user_id => current_user.id, :follow => true)
-  	if company_user.blank?
-  		@comments = []
-		else
-			@comments = company_comments(company_user)
-  	end
+  	if current_user
+	  	company_user = CompanyUser.where(:user_id => current_user.id, :follow => true)
+	  	if company_user.blank?
+	  		@comments = []
+			else
+				@comments = company_comments(company_user)
+	  	end
+	  end
   end
 
   private
