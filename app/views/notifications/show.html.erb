@@ -23,11 +23,13 @@
 		  </p>
 		<% end %>
 
-		<%= form_tag(create_subcomment_in_notifications_path @company, @comment, :method => :post) do %>
-  	<div class="field subcomment"><%= text_area_tag 'content', '', :rows => "1", :placeholder => 'Entre com seu comentário' %></div>
-  		<button type="submit" value="post" class="btn btn-inverse">
-  			<i class="icon-comment"></i> Comentar
-			</button>
+		<% if current_user %>
+			<%= form_tag(create_subcomment_in_notifications_path @company, @comment, :method => :post) do %>
+	  	<div class="field subcomment"><%= text_area_tag 'content', '', :rows => "1", :placeholder => 'Entre com seu comentário' %></div>
+	  		<button type="submit" value="post" class="btn btn-inverse">
+	  			<i class="icon-comment"></i> Comentar
+				</button>
+			<% end %>
 		<% end %>
 		</ul>
 	</div>
